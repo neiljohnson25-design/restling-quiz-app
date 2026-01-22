@@ -20,13 +20,13 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-black">
       <div className="max-w-md w-full animate-fadeIn">
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-block group">
             <div className="relative">
-              <img src="/images/logo.png" alt="Big Blue Cage" className="h-24 mx-auto mb-4 transition-transform group-hover:scale-105" />
+              <img src="/images/logo.png" alt="Big Blue Cage" className="h-20 md:h-32 mx-auto mb-4 transition-transform group-hover:scale-105" />
               <div className="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           </Link>
@@ -112,12 +112,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Demo Account */}
-        <div className="mt-6 text-center">
-          <p className="text-slate-600 text-sm px-4 py-2 bg-slate-900/50 rounded-full inline-block">
-            Demo: admin@bigbluecage.com / admin123
-          </p>
-        </div>
       </div>
     </div>
   );

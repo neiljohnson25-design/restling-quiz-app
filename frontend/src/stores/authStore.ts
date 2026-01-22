@@ -96,12 +96,17 @@ export const useAuthStore = create<AuthState>()(
 
         try {
           const response = await api.get('/users/me');
-          const { user, stats, xpProgress } = response.data.user;
-          set({ user, stats, xpProgress, isAuthenticated: true });
-        } catch {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          set({ user: null, stats: null, xpProgress: null, isAuthenticated: false });
+          const { stats, xpProgress, ...userData } = response.data.user;
+          set({ user: userData, stats, xpProgress, isAuthenticated: true });
+        } catch (error: any) {
+          // Only log out on 401 (unauthorized) - other errors might be temporary
+          if (error.response?.status === 401) {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            set({ user: null, stats: null, xpProgress: null, isAuthenticated: false });
+          }
+          // For other errors, keep the user authenticated but log for debugging
+          console.error('Failed to fetch user profile:', error);
         }
       },
 
