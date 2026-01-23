@@ -32,7 +32,7 @@ router.get('/', optionalAuth, async (req: AuthRequest, res: Response): Promise<v
       ...category,
       questionCount: category._count.questions,
       userProgress: userProgress[category.id] || null,
-      isLocked: req.user ? req.user.isAdmin ? false : category.unlockLevel > (userProgress[category.id]?.masteryLevel || 0) : category.unlockLevel > 1,
+      isLocked: req.user ? req.user.isAdmin ? false : category.unlockLevel > (userProgress[category.id]?.masteryLevel || 0) + 1 : category.unlockLevel > 1,
     }));
 
     res.json({ categories: categoriesWithProgress });
